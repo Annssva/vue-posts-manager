@@ -15,7 +15,11 @@
       </div>
     </div>
     <div class="post__button">
-      <button-ui>Удалить</button-ui>
+      <button-ui
+          @click="$emit('remove', post)"
+      >
+        Удалить
+      </button-ui>
     </div>
   </div>
 </template>

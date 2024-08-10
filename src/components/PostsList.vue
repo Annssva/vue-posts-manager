@@ -1,11 +1,16 @@
 <template>
-  <div>
+  <div v-if="posts.length > 0">
     <h3>Список постов</h3>
     <post
         v-for="post in posts"
         :post="post"
+        :key="post.id"
+        @remove="$emit('remove', post)"
     />
   </div>
+  <h2 class="titleError" v-else>
+    Список пользователей пуст
+  </h2>
 </template>
 
 <script>
@@ -23,5 +28,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .titleError {
+    color: red;
+  }
 </style>
