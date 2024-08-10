@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <h1>Страница с постами</h1>
+    <h1 >Страница с постами</h1>
     <button-ui
       @click="showModal"
       class="showButton"
@@ -15,7 +15,9 @@
     <posts-list
         :posts="posts"
         @remove="removePost"
+        v-if="!isPostsLoading"
     />
+    <div v-else>Идет загрузка...</div>
   </div>
 </template>
 
@@ -24,6 +26,7 @@ import PostForm from './components/PostForm.vue';
 import PostsList from './components/PostsList.vue';
 import ModalUi from '@/components/UI/ModalUI.vue';
 import ButtonUi from '@/components/UI/ButtonUI.vue';
+import axios from 'axios';
 export default {
   components: {
     ButtonUi,
@@ -33,13 +36,9 @@ export default {
   data() {
     return {
       posts: [
-        {id: 0, title: 'Пост о Vue.js №1', body: 'Описание поста лялялял'},
-        {id: 1, title: 'Пост о Vue.js №2', body: 'Описание поста бебебебебебеббе'},
-        {id: 2, title: 'Пост о Vue.js №3', body: 'Описание поста вот так вот да'},
-        {id: 3, title: 'Пост о Vue.js №4', body: 'Описание поста ну туда сюда'},
-        {id: 4, title: 'Пост о Vue.js №5', body: 'Описание поста получается так'},
       ],
       isModalOpen: false,
+      isPostsLoading: false
     }
   },
   methods: {
@@ -52,7 +51,21 @@ export default {
     },
     showModal() {
       this.isModalOpen = true;
+    },
+    async fetchPosts() {
+      try {
+        this.isPostsLoading = true
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+        this.posts = response.data;
+      } catch (e) {
+        alert('Ошибка!')
+      } finally {
+        this.isPostsLoading = false
+      }
     }
+  },
+  mounted() {
+    this.fetchPosts()
   }
 }
 </script>
