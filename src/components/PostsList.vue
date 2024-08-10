@@ -1,22 +1,18 @@
 <template>
-  <div class="post" v-for="post in posts">
-    <div>
-      <strong>
-        Название:
-      </strong>
-      {{ post.title }}
-    </div>
-    <div>
-      <strong>
-        Описание:
-      </strong>
-      {{ post.body }}
-    </div>
+  <div>
+    <h3>Список постов</h3>
+    <post
+        v-for="post in posts"
+        :post="post"
+    />
   </div>
 </template>
 
 <script>
+import Post from '@/components/Post.vue';
+
 export default {
+  components: {Post},
   props: {
     posts: {
       type: Array,
@@ -27,9 +23,5 @@ export default {
 </script>
 
 <style scoped>
-  .post {
-    margin-top: 15px;
-    padding: 15px;
-    border: 2px solid darkgreen;
-  }
+
 </style>
