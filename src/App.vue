@@ -1,8 +1,17 @@
 <template>
   <div class="app">
-    <post-form
-        @create="createPost"
-    />
+    <h1>Страница с постами</h1>
+    <button-ui
+      @click="showModal"
+      class="showButton"
+    >
+      Добавить новый пост
+    </button-ui>
+    <modal-ui v-model:show="isModalOpen">
+      <post-form
+          @create="createPost"
+      />
+    </modal-ui>
     <posts-list
         :posts="posts"
         @remove="removePost"
@@ -13,8 +22,12 @@
 <script>
 import PostForm from './components/PostForm.vue';
 import PostsList from './components/PostsList.vue';
+import ModalUi from '@/components/UI/ModalUI.vue';
+import ButtonUi from '@/components/UI/ButtonUI.vue';
 export default {
   components: {
+    ButtonUi,
+    ModalUi,
     PostForm, PostsList
   },
   data() {
@@ -26,14 +39,19 @@ export default {
         {id: 3, title: 'Пост о Vue.js №4', body: 'Описание поста ну туда сюда'},
         {id: 4, title: 'Пост о Vue.js №5', body: 'Описание поста получается так'},
       ],
+      isModalOpen: false,
     }
   },
   methods: {
     createPost(post) {
-      this.posts.push(post)
+      this.posts.push(post);
+      this.isModalOpen = false;
     },
     removePost(post) {
-      this.posts = this.posts.filter(p => p.id !== post.id)
+      this.posts = this.posts.filter(p => p.id !== post.id);
+    },
+    showModal() {
+      this.isModalOpen = true;
     }
   }
 }
@@ -48,5 +66,9 @@ export default {
 
 .app {
   padding: 10px;
+}
+
+.showButton{
+  margin: 15px 0;
 }
 </style>
