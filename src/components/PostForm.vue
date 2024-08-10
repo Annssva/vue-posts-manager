@@ -13,17 +13,20 @@
         type="text"
         placeholder="Описание"
     >
-    <button
+    <button-u-i
         class="button"
         @click="createPost"
     >
       Создать
-    </button>
+    </button-u-i>
   </form>
 </template>
 
 <script>
+import ButtonUI from '@/components/UI/ButtonUI.vue';
+
 export default {
+  components: { ButtonUI },
   data() {
     return {
       post: {
@@ -59,11 +62,6 @@ export default {
   }
 
   .button {
-    margin-top: 15px;
     align-self: flex-end;
-    padding: 10px 15px;
-    background: none;
-    color: teal;
-    border: 1px solid teal;
   }
 </style>
