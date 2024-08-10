@@ -13,20 +13,18 @@
         type="text"
         placeholder="Описание"
     >
-    <button-u-i
+    <button-ui
         class="button"
         @click="createPost"
     >
       Создать
-    </button-u-i>
+    </button-ui>
   </form>
 </template>
 
 <script>
-import ButtonUI from '@/components/UI/ButtonUI.vue';
 
 export default {
-  components: { ButtonUI },
   data() {
     return {
       post: {

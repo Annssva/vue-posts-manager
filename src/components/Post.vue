@@ -15,16 +15,13 @@
       </div>
     </div>
     <div class="post__button">
-      <button-u-i>Удалить</button-u-i>
+      <button-ui>Удалить</button-ui>
     </div>
   </div>
 </template>
 
 <script>
-import ButtonUI from '@/components/UI/ButtonUI.vue';
-
 export default {
-  components: {ButtonUI},
   props: {
     post: {
       type: Object,
