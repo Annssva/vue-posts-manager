@@ -11,7 +11,7 @@
     </transition-group>
   </div>
   <h2 class="titleError" v-else>
-    Список пользователей пуст
+    Список постов пуст
   </h2>
 </template>
 

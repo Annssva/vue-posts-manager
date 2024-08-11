@@ -2,10 +2,11 @@
   <div >
     <h1 >Страница с постами</h1>
     <input-ui
+        v-focus
         v-model="searchQuery"
         placeholder="Поиск..."
     />
-    <div class="app__buttons">
+    <div class="posts__buttons">
       <button-ui
           @click="showModal"
       >
@@ -29,7 +30,7 @@
         v-if="!isPostsLoading"
     />
     <div v-else>Идет загрузка...</div>
-    <div ref="observer" class="observer">
+    <div v-intersection="loadMorePosts" ref="observer" class="observer">
 
     </div>
     <!--    <div class="page__wrapper">-->
@@ -137,18 +138,18 @@ export default {
   },
   mounted() {
     this.fetchPosts();
-    const options = {
-      rootMargin: '0px',
-      threshold: 1.0,
-    }
-    const callback = (entries, observer) => {
-      if(entries[0].isIntersecting && this.page < this.totalPages) {
-        this.loadMorePosts()
-      }
-    }
-
-    const observer = new IntersectionObserver(callback, options)
-    observer.observe(this.$refs.observer);
+    // const options = {
+    //   rootMargin: '0px',
+    //   threshold: 1.0,
+    // }
+    // const callback = (entries, observer) => {
+    //   if(entries[0].isIntersecting && this.page < this.totalPages) {
+    //     this.loadMorePosts()
+    //   }
+    // }
+    //
+    // const observer = new IntersectionObserver(callback, options)
+    // observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
@@ -176,8 +177,8 @@ export default {
 <style>
 
 
-.app__buttons {
-  margin: 15px;
+.posts__buttons {
+  margin: 15px 0;
   display: flex;
   justify-content: space-between;
 }
