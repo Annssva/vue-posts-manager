@@ -27,7 +27,7 @@
       />
     </modal-ui>
     <posts-list
-        :posts="$sortedAndSearchedPosts"
+        :posts="sortedAndSearchedPosts"
         @remove="removePost"
         v-if="!isPostsLoading"
     />

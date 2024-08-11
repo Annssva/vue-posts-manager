@@ -4,6 +4,7 @@ import PostsListPage from '@/pages/PostsListPage.vue';
 import AboutPage from '@/pages/AboutPage.vue';
 import PostPage from '@/pages/PostPage.vue';
 import PostsListPageStore from '@/pages/PostsListPageStore.vue';
+import PostsListPageCompositionApi from '@/pages/PostsListPageCompositionApi.vue';
 
 
 const routes = [
@@ -30,6 +31,10 @@ const routes = [
 	{
 		path: '/store',
 		component: PostsListPageStore
+	},
+	{
+		path: '/compApi',
+		component: PostsListPageCompositionApi
 	},
 ]
 
