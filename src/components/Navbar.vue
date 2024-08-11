@@ -4,6 +4,7 @@
     <div class="navbar__buttons">
       <button-ui @click="$router.push('/posts')">Посты</button-ui>
       <button-ui @click="$router.push('/about')">О сайте</button-ui>
+      <button-ui @click="$router.push('/store')">Посты (Vuex)</button-ui>
     </div>
   </div>
 </template>
