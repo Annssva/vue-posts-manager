@@ -18,7 +18,7 @@ npm run build
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-**Данное приложение было разработано с целью изучения Vue.js**
+### Данное приложение было разработано с целью изучения Vue.js ###
 Было изучено и использовано:
 - Компонент App
 - Интерполяция
