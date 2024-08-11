@@ -1,19 +1,26 @@
 <template>
   <div class="app">
     <h1 >Страница с постами</h1>
-    <button-ui
-      @click="showModal"
-      class="showButton"
-    >
-      Добавить новый пост
-    </button-ui>
+    <div class="app__buttons">
+      <button-ui
+          @click="showModal"
+      >
+        Добавить новый пост
+      </button-ui>
+      <select-ui
+      v-model="selectedSort"
+      :options="sortOptions"
+      >
+      </select-ui>
+    </div>
+
     <modal-ui v-model:show="isModalOpen">
       <post-form
           @create="createPost"
       />
     </modal-ui>
     <posts-list
-        :posts="posts"
+        :posts="sortedPosts"
         @remove="removePost"
         v-if="!isPostsLoading"
     />
@@ -27,8 +34,10 @@ import PostsList from './components/PostsList.vue';
 import ModalUi from '@/components/UI/ModalUI.vue';
 import ButtonUi from '@/components/UI/ButtonUI.vue';
 import axios from 'axios';
+import SelectUi from '@/components/UI/SelectUI.vue';
 export default {
   components: {
+    SelectUi,
     ButtonUi,
     ModalUi,
     PostForm, PostsList
@@ -38,7 +47,18 @@ export default {
       posts: [
       ],
       isModalOpen: false,
-      isPostsLoading: false
+      isPostsLoading: false,
+      selectedSort: '',
+      sortOptions: [
+        {
+          value: 'title',
+          name: 'По названию'
+        },
+        {
+          value: 'body',
+          name: 'По содержимому'
+        }
+      ]
     }
   },
   methods: {
@@ -66,6 +86,19 @@ export default {
   },
   mounted() {
     this.fetchPosts()
+  },
+  computed: {
+    sortedPosts() {
+      return [...this.posts].sort((post1, post2) =>
+          post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+    },
+    // watch: {
+    //   selectedSort(newValue) {
+    //     this.posts.sort((post1, post2) => {
+    //       return post1[newValue]?.localeCompare(post2[newValue])
+    //     })
+    //   }
+    // }
   }
 }
 </script>
@@ -81,7 +114,10 @@ export default {
   padding: 10px;
 }
 
-.showButton{
-  margin: 15px 0;
+
+.app__buttons {
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>
