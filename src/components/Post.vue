@@ -3,6 +3,11 @@
     <div>
       <div>
         <strong>
+          № {{ post.id }}
+        </strong>
+      </div>
+      <div>
+        <strong>
           Название:
         </strong>
         {{ post.title }}
@@ -14,7 +19,12 @@
         {{ post.body }}
       </div>
     </div>
-    <div class="post__button">
+    <div class="post__buttons">
+      <button-ui
+        @click="$router.push(`/posts/${post.id}`)"
+      >
+        Открыть
+      </button-ui>
       <button-ui
           @click="$emit('remove', post)"
       >
@@ -25,7 +35,10 @@
 </template>
 
 <script>
+import ButtonUi from '@/components/UI/ButtonUI.vue';
+
 export default {
+  components: {ButtonUi},
   props: {
     post: {
       type: Object,
@@ -43,5 +56,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .post__buttons {
+    display: flex;
+    gap: 5px
   }
 </style>
