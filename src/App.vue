@@ -1,6 +1,10 @@
 <template>
   <div class="app">
     <h1 >Страница с постами</h1>
+    <input-ui
+      v-model="searchQuery"
+      placeholder="Поиск..."
+    />
     <div class="app__buttons">
       <button-ui
           @click="showModal"
@@ -20,7 +24,7 @@
       />
     </modal-ui>
     <posts-list
-        :posts="sortedPosts"
+        :posts="sortedAndSearchedPosts"
         @remove="removePost"
         v-if="!isPostsLoading"
     />
@@ -35,8 +39,10 @@ import ModalUi from '@/components/UI/ModalUI.vue';
 import ButtonUi from '@/components/UI/ButtonUI.vue';
 import axios from 'axios';
 import SelectUi from '@/components/UI/SelectUI.vue';
+import InputUi from '@/components/UI/InputUI.vue';
 export default {
   components: {
+    InputUi,
     SelectUi,
     ButtonUi,
     ModalUi,
@@ -49,6 +55,7 @@ export default {
       isModalOpen: false,
       isPostsLoading: false,
       selectedSort: '',
+      searchQuery: '',
       sortOptions: [
         {
           value: 'title',
@@ -92,6 +99,10 @@ export default {
       return [...this.posts].sort((post1, post2) =>
           post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
     },
+    sortedAndSearchedPosts() {
+      return this.sortedPosts.filter( post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
+    }
+  }
     // watch: {
     //   selectedSort(newValue) {
     //     this.posts.sort((post1, post2) => {
@@ -99,7 +110,6 @@ export default {
     //     })
     //   }
     // }
-  }
 }
 </script>
 
