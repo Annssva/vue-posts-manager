@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <h1> Добро пожаловать! </h1>
-    <router-link to="/posts">Посты</router-link>
-    <router-link to="/about">О сайте</router-link>
+  <div class="main-container">
+    <h1 > Добро пожаловать! </h1>
   </div>
 </template>
 
@@ -12,6 +10,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
+<style scoped>
+.main-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 </style>

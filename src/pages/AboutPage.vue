@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Данное приложение было разработано с целью изучения Vue.js</h1>
+    <div class="title-container">
+      <h1>Данное приложение было разработано с целью изучения Vue.js</h1>
+    </div>
     <h3>Было изучено и использовано:</h3>
     <ul class="list">
       <li> Компонент App </li>
@@ -50,6 +52,11 @@ export default {
 </script>
 
 <style scoped>
+  .title-container {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+  }
   .list {
     margin-left: 20px;
   }

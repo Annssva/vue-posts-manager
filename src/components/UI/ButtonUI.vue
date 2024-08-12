@@ -17,4 +17,16 @@ export default {
     color: teal;
     border: 1px solid teal;
   }
+
+  .button:hover {
+    color: #006b6b;
+    border: 2px solid #006b6b;
+    padding: 9px 14px;
+  }
+
+  .button:active {
+    color: #003333;
+    border: 2px solid #003333;
+    padding: 9px 14px;
+  }
 </style>
